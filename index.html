@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>นารายณ์ราชา: มหาราชแห่งอยุธยา</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- หน้าจอเริ่มต้น -->
+  <div id="title-screen" class="screen active">
+    <div class="title-overlay">
+      <div class="title-emblem">&#9782;</div>
+      <h1 class="title-main">นารายณ์ราชา</h1>
+      <h2 class="title-sub">มหาราชแห่งอยุธยา</h2>
+      <p class="title-era">พ.ศ. ๒๑๙๙ — ๒๒๓๑</p>
+      <div class="title-menu">
+        <button id="btn-new-game" class="btn-gold">เริ่มเกมใหม่</button>
+        <button id="btn-load-game" class="btn-gold">โหลดเกม</button>
+        <button id="btn-how-to-play" class="btn-gold">วิธีเล่น</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- หน้าจอวิธีเล่น -->
+  <div id="tutorial-screen" class="screen">
+    <div class="tutorial-container">
+      <h2>วิธีเล่น</h2>
+      <div class="tutorial-content">
+        <div class="tutorial-section">
+          <h3>เกี่ยวกับเกม</h3>
+          <p>คุณคือ <strong>สมเด็จพระนารายณ์มหาราช</strong> กษัตริย์แห่งกรุงศรีอยุธยา
+          บริหารราชอาณาจักรให้เจริญรุ่งเรือง ผ่านการค้า การทูต และการทหาร</p>
+        </div>
+        <div class="tutorial-section">
+          <h3>แต่ละเทิร์น (1 ปี)</h3>
+          <ol>
+            <li><strong>ระยะการค้า</strong> — เลือกส่งสินค้าไปค้าขายกับต่างประเทศ</li>
+            <li><strong>ระยะการทูต</strong> — ส่งราชทูต รับคณะทูต ลงนามสนธิสัญญา</li>
+            <li><strong>ระยะการทหาร</strong> — จัดกำลังพล สร้างกองทัพ ออกรบ</li>
+            <li><strong>เหตุการณ์พิเศษ</strong> — เหตุการณ์ประวัติศาสตร์ที่ต้องตัดสินใจ</li>
+          </ol>
+        </div>
+        <div class="tutorial-section">
+          <h3>ทรัพยากร</h3>
+          <ul>
+            <li><span class="res-icon">&#x1F4B0;</span> <strong>ทองคลัง</strong> — ใช้ในการค้า สร้าง จ้างทหาร</li>
+            <li><span class="res-icon">&#x1F35A;</span> <strong>อาหาร</strong> — เสบียงสำหรับประชาชนและกองทัพ</li>
+            <li><span class="res-icon">&#x1F64F;</span> <strong>ศรัทธา</strong> — ความศรัทธาของราษฎร</li>
+            <li><span class="res-icon">&#x1F451;</span> <strong>อำนาจ</strong> — ความเข้มแข็งราชบัลลังก์</li>
+            <li><span class="res-icon">&#x2B50;</span> <strong>ชื่อเสียง</strong> — ชื่อเสียงในเวทีนานาชาติ</li>
+          </ul>
+        </div>
+        <div class="tutorial-section">
+          <h3>ตอนจบ</h3>
+          <p>การตัดสินใจของคุณจะนำไปสู่ 1 ใน 4 ตอนจบที่แตกต่างกัน!</p>
+        </div>
+      </div>
+      <button id="btn-back-title" class="btn-gold">กลับ</button>
+    </div>
+  </div>
+
+  <!-- หน้าจอเกมหลัก -->
+  <div id="game-screen" class="screen">
+    <!-- แถบด้านบน: ทรัพยากร -->
+    <header id="top-bar">
+      <div class="top-bar-left">
+        <span class="game-title-small">&#9782; นารายณ์ราชา</span>
+      </div>
+      <div class="top-bar-center" id="resource-bar">
+        <div class="resource" title="ทองคลัง">
+          <span class="res-icon">&#x1F4B0;</span>
+          <span id="res-gold">5000</span>
+        </div>
+        <div class="resource" title="อาหาร">
+          <span class="res-icon">&#x1F35A;</span>
+          <span id="res-food">500</span>
+        </div>
+        <div class="resource" title="ศรัทธา">
+          <span class="res-icon">&#x1F64F;</span>
+          <span id="res-faith">75</span>
+        </div>
+        <div class="resource" title="อำนาจ">
+          <span class="res-icon">&#x1F451;</span>
+          <span id="res-authority">80</span>
+        </div>
+        <div class="resource" title="ชื่อเสียง">
+          <span class="res-icon">&#x2B50;</span>
+          <span id="res-prestige">50</span>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <span id="year-display">พ.ศ. 2199</span>
+        <span id="turn-display">เทิร์น 1</span>
+      </div>
+    </header>
+
+    <!-- เนื้อหาหลัก -->
+    <main id="main-content">
+      <!-- เมนูด้านซ้าย -->
+      <nav id="side-menu">
+        <button class="menu-btn active" data-panel="panel-overview">
+          <span class="menu-icon">&#x1F3EF;</span>
+          <span>ภาพรวม</span>
+        </button>
+        <button class="menu-btn" data-panel="panel-trade">
+          <span class="menu-icon">&#x1F4E6;</span>
+          <span>การค้า</span>
+        </button>
+        <button class="menu-btn" data-panel="panel-diplomacy">
+          <span class="menu-icon">&#x1F91D;</span>
+          <span>การทูต</span>
+        </button>
+        <button class="menu-btn" data-panel="panel-military">
+          <span class="menu-icon">&#x2694;&#xFE0F;</span>
+          <span>การทหาร</span>
+        </button>
+        <button class="menu-btn" data-panel="panel-court">
+          <span class="menu-icon">&#x1F3DB;&#xFE0F;</span>
+          <span>ราชสำนัก</span>
+        </button>
+        <button class="menu-btn" data-panel="panel-log">
+          <span class="menu-icon">&#x1F4DC;</span>
+          <span>บันทึก</span>
+        </button>
+        <div class="menu-spacer"></div>
+        <button id="btn-save" class="menu-btn menu-btn-action">
+          <span class="menu-icon">&#x1F4BE;</span>
+          <span>บันทึกเกม</span>
+        </button>
+        <button id="btn-end-turn" class="menu-btn menu-btn-end-turn">
+          <span class="menu-icon">&#x27A1;&#xFE0F;</span>
+          <span>จบเทิร์น</span>
+        </button>
+      </nav>
+
+      <!-- พื้นที่เนื้อหาหลัก -->
+      <section id="content-area">
+        <!-- แผงภาพรวม -->
+        <div id="panel-overview" class="panel active">
+          <h2>ภาพรวมราชอาณาจักร</h2>
+          <div id="overview-map"></div>
+          <div id="overview-status"></div>
+        </div>
+
+        <!-- แผงการค้า -->
+        <div id="panel-trade" class="panel">
+          <h2>การค้ากับต่างประเทศ</h2>
+          <div id="trade-partners"></div>
+        </div>
+
+        <!-- แผงการทูต -->
+        <div id="panel-diplomacy" class="panel">
+          <h2>การเจริญสัมพันธไมตรี</h2>
+          <div id="diplomacy-nations"></div>
+        </div>
+
+        <!-- แผงการทหาร -->
+        <div id="panel-military" class="panel">
+          <h2>กองทัพอยุธยา</h2>
+          <div id="military-units"></div>
+          <div id="military-battles"></div>
+        </div>
+
+        <!-- แผงราชสำนัก -->
+        <div id="panel-court" class="panel">
+          <h2>ราชสำนัก</h2>
+          <div id="court-advisors"></div>
+        </div>
+
+        <!-- แผงบันทึก -->
+        <div id="panel-log" class="panel">
+          <h2>บันทึกราชกิจ</h2>
+          <div id="log-entries"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- แถบสถานะด้านล่าง -->
+    <footer id="status-bar">
+      <span id="status-message">พร้อมรับพระบรมราชโองการ</span>
+      <span id="phase-display">ระยะ: รอคำสั่ง</span>
+    </footer>
+  </div>
+
+  <!-- หน้าจอเหตุการณ์ (Visual Novel Overlay) -->
+  <div id="event-screen" class="overlay">
+    <div class="event-container">
+      <div id="event-bg" class="event-background"></div>
+      <div id="event-characters" class="event-characters"></div>
+      <div class="event-dialog-box">
+        <div id="event-speaker" class="event-speaker"></div>
+        <div id="event-text" class="event-text"></div>
+        <div id="event-choices" class="event-choices"></div>
+        <button id="event-next" class="btn-gold event-next-btn" style="display:none;">ต่อไป</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- หน้าจอการรบ -->
+  <div id="battle-screen" class="overlay">
+    <div class="battle-container">
+      <h2 id="battle-title" class="battle-title"></h2>
+      <div class="battle-field">
+        <div class="battle-side battle-ally">
+          <h3>กองทัพอยุธยา</h3>
+          <div id="battle-ally-units"></div>
+          <div class="battle-power">กำลังรบ: <span id="battle-ally-power">0</span></div>
+        </div>
+        <div class="battle-vs">VS</div>
+        <div class="battle-side battle-enemy">
+          <h3 id="battle-enemy-name"></h3>
+          <div id="battle-enemy-units"></div>
+          <div class="battle-power">กำลังรบ: <span id="battle-enemy-power">0</span></div>
+        </div>
+      </div>
+      <div id="battle-log" class="battle-log"></div>
+      <div id="battle-result" class="battle-result" style="display:none;"></div>
+      <div id="battle-actions" class="battle-actions">
+        <button id="btn-battle-fight" class="btn-gold">เข้าตี!</button>
+        <button id="btn-battle-retreat" class="btn-gold btn-secondary">ล่าถอย</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- หน้าจอสรุปเทิร์น -->
+  <div id="turn-summary-screen" class="overlay">
+    <div class="summary-container">
+      <h2 id="summary-title">สรุปปี พ.ศ. 2199</h2>
+      <div id="summary-changes" class="summary-changes"></div>
+      <div id="summary-events" class="summary-events"></div>
+      <button id="btn-next-turn" class="btn-gold">เข้าสู่ปีถัดไป</button>
+    </div>
+  </div>
+
+  <!-- หน้าจอจบเกม -->
+  <div id="ending-screen" class="overlay">
+    <div class="ending-container">
+      <div id="ending-icon" class="ending-icon"></div>
+      <h1 id="ending-title" class="ending-title"></h1>
+      <p id="ending-description" class="ending-desc"></p>
+      <div id="ending-stats" class="ending-stats"></div>
+      <button id="btn-ending-title" class="btn-gold">กลับหน้าแรก</button>
+    </div>
+  </div>
+
+  <!-- โหลดสคริปต์ -->
+  <script src="js/game-state.js"></script>
+  <script src="js/characters.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/trade.js"></script>
+  <script src="js/diplomacy.js"></script>
+  <script src="js/military.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
